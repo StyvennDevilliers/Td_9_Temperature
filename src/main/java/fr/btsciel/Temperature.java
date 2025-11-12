@@ -1,5 +1,7 @@
 package fr.btsciel;
 
+import java.time.LocalDate;
+
 public class Temperature {
     private String jour;
     private double matin;

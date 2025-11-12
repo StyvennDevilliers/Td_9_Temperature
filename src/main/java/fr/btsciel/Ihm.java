@@ -1,6 +1,8 @@
 package fr.btsciel;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 public class Ihm {
@@ -9,17 +11,21 @@ public class Ihm {
         double maxMatin = Double.MIN_VALUE , minMatin = Double.MAX_VALUE , moyMatin = 0;
         double maxSoir = Double.MIN_VALUE , minSoir = Double.MAX_VALUE , moySoir = 0;
         Temperature [] temperatures = new Temperature [7];
-        String [] jour =   {"lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"};
+        String [] jour1 = new String[7];
+        String [] jour = new String[]{"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"};
+        LocalDate date = LocalDate.now();
+        int day = date.getDayOfWeek().getValue();
+        for (int i = day; i > day-7; i--) {
+            jour1[i] = jour[i];
+            System.out.println(jour1[i]);
+        }
         DecimalFormat df = new DecimalFormat("0.00");
         Random rand = new Random();
         double valeurmatin,valeursoir;
         for (int i = 0; i < temperatures.length; i++) {
-            valeurmatin = rand.nextDouble(-10,10) ;
+            valeurmatin = rand.nextDouble(-20,5) ;
             valeursoir = rand.nextDouble(10,30) ;
             temperatures[i] = new Temperature(jour[i],valeurmatin,valeursoir);
-            /*System.out.print(Color.getBLACKBG() + temperatures[i].getJour() + "\t");
-            System.out.print(Color.getBLUE() + df.format(temperatures[i].getMatin()) + "\t");
-            System.out.println(Color.getBLACKBG() + Color.getRED() + df.format(temperatures[i].getSoir()) + "\t" + Color.getRESET()); */
 
             maxMatin = Temperature.getMax(temperatures[i].getMatin(),maxMatin);
             minMatin = Temperature.getMin(temperatures[i].getMatin(),minMatin);
@@ -41,6 +47,7 @@ public class Ihm {
 
             }
         }
+
         System.out.printf("%-10s",Color.getBLACKBG() + "Jour" + Color.getRESET() + "\t");
         for (int i = 0; i < temperatures.length; i++) {
             System.out.printf("%-10s",temperatures[i].getJour());
@@ -53,7 +60,6 @@ public class Ihm {
         for (int i = 0; i < temperatures.length; i++) {
             System.out.printf("%-10s",df.format(temperatures[i].getSoir()));
         }
-
 
         moyMatin = Temperature.getMoy(moyMatin,temperatures.length);
         moySoir = Temperature.getMoy(moySoir,temperatures.length);
