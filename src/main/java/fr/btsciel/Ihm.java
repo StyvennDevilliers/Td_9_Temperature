@@ -49,15 +49,15 @@ public class Ihm {
         LesTemperatures tableau = new LesTemperatures(temperatures);
         System.out.printf("%-10s",Color.getBLACKBG() + "Jour" + Color.getRESET() + "\t");
         for (int i = 0; i < temperatures.length; i++) {
-            System.out.printf("%-10s",temperatures[i].getJour());
+            System.out.printf("%-10s", tableau.getTableau(i).getJour());
         }
         System.out.printf("%-10s","\n" + Color.getBLACKBG() + "Matin" + Color.getRESET() + "\t");
         for (int i = 0; i < temperatures.length; i++) {
-            System.out.printf("%-10s",df.format(temperatures[i].getMatin()));
+            System.out.printf("%-10s",df.format(tableau.getTableau(i).getMatin()));
         }
         System.out.printf("%-10s","\n" + Color.getBLACKBG() + "Soir" + Color.getRESET() + "\t");
         for (int i = 0; i < temperatures.length; i++) {
-            System.out.printf("%-10s",df.format(temperatures[i].getSoir()));
+            System.out.printf("%-10s",df.format(tableau.getTableau(i).getSoir()));
         }
 
 
